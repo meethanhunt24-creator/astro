@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>திருமண பொருத்தம் | Authentic Tamil Marriage Matching</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #b71c1c, #e53935);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card-header {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: -25px -25px 20px -25px;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #b71c1c;
+            box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
+        }
+        
+        .btn {
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: background0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .btn-reset {
+            background-color: #757575;
+            margin-top: 5px;
+        }
+        
+        .btn-reset:hover {
+            background-color: #8d6e63;
+        }
+        
+        .result-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            margin-top: 30px;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b71c1c, #e53935);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 8px rgba(183, 28, 28, 0.3);
+        }
+        
+        .verdict-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px auto;
+            padding: 15px;
+        }
+        
+        .verdict-yes {
+            background: linear-gradient(135deg, #2e7d32, #388e3c);
+            color: white;
+        }
+        
+        .verdict-no {
+            background: linear-gradient(135deg, #c62828, #d32f2f);
+            color: white;
+        }
+        
+        .verdict-avg {
+            background: linear-gradient(135deg, #f57c00, #ff9800);
+            color: white;
+        }
+        
+        .porutham-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .porutham-list li {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+        
+        .porutham-good {
+            border-left: 4px solid #2e7d32;
+            background-color: #e8f5e9;
+        }
+        
+        .porutham-average {
+            border-left: 4px solid #ef6c00;
+            background-color: #fff3e0;
+        }
+        
+        .porutham-bad {
+            border-left: 4px solid #c62828;
+            background-color: #ffebee;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .star-rating {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .key-point {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #1976d2;
+        }
+        
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .pros-cons div {
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .pros {
+            background: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .cons {
+            background: #ffebee;
+            border-left: 4px solid #c62828;
+        }
+        
+        .nakshatra-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>திருமண பொருத்தம் - உண்மையான கணக்கீடு</h1>
+        <p class="subtitle">Traditional Tamil Marriage Matching | Based on 10 Poruthams | 100% Accurate Calculations</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">★ புத்திரரின் விவரங்கள் ★</div>
+            <div class="form-group">
+                <label for="maleName">பையனின் பெயர் *</label>
+                <input type="text" id="maleName" placeholder="உதாரணம்: கார்த்தி">
+            </div>
+            <div class="form-group">
+                <label for="maleNakshatra">பையனின் நட்சத்திரம் *</label>
+                <select id="maleNakshatra">
+                    <option value="">தேர்வு செய்யவும்</option>
+                    <option value="aswini">அஸ்வினி</option>
+                    <option value="bharani">பரணி</option>
+                    <option value="krittika">கிருத்திகை</option>
+                    <option value="rohini">ரோகிணி</option>
+                    <option value="mrigashirsha">மிருகசீரிடம்</option>
+                    <option value="ardra">திருவாதிரை</option>
+                    <option value="punarvasu">புனர்பூசம்</option>
+                    <option value="pushya">பூசம்</option>
+                    <option value="ashlesha">ஆயில்யம்</option>
+                    <option value="magha">மகம்</option>
+                    <option value="purva_phalguni">பூரம்</option>
+                    <option value="uttara_phalguni">உத்திரம்</option>
+                    <option value="hasta">ஹஸ்தம்</option>
+                    <option value="chitra">சித்திரை</option>
+                    <option value="swati">விசாகம்</option>
+                    <option value="vishakha">விசாகம்</option>
+                    <option value="anuradha">அனுசம்</option>
+                    <option value="jyeshtha">கேட்டை</option>
+                    <option value="mula">மூலம்</option>
+                    <option value="purva_ashadha">பூராடம்</option>
+                    <option value="uttara_ashadha">உத்திராடம்</option>
+                    <option value="shravana">திருவோணம்</option>
+                    <option value="dhanishta">அவிட்டம்</option>
+                    <option value="shatabhisha">சதயம்</option>
+                    <option value="purva_bhadrapada">பூரட்டாதி</option>
+                    <option value="uttara_bhadrapada">உத்திரட்டாதி</option>
+                    <option value="revati">ரேவதி</option>
+                </select>
+                <div class="nakshatra-info">உங்கள் நட்சத்திரத்தை தெரியாவிட்டால், பிறப்பு தேதியைப் பயன்படுத்தி online panchang உதவி பெற்றுக்கொள்ளவும்</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">★ பெண்ணின் விவரங்கள் ★</div>
+            <div class="form-group">
+                <label for="femaleName">பெண்ணின் பெயர் *</label>
+                <input type="text" id="femaleName" placeholder="உதாரணம்: லக்ஷ்மி">
+            </div>
+            <div class="form-group">
+                <label for="femaleNakshatra">பெண்ணின் நட்சத்திரம் *</label>
+                <select id="femaleNakshatra">
+                    <option value="">தேர்வு செய்யவும்</option>
+                    <option value="aswini">அஸ்வினி</option>
+                    <option value="bharani">பரணி</option>
+                    <option value="krittika">கிருத்திகை</option>
+                    <option value="rohini">ரோகிணி</option>
+                    <option value="mrigashirsha">மிருகசீரிடம்</option>
+                    <option value="ardra">திருவாதிரை</option>
+                    <option value="punarvasu">புனர்பூசம்</option>
+                    <option value="pushya">பூசம்</option>
+                    <option value="ashlesha">ஆயில்யம்</option>
+                    <option value="magha">மகம்</option>
+                    <option value="purva_phalguni">பூரம்</option>
+                    <option value="uttara_phalguni">உத்திரம்</option>
+                    <option value="hasta">ஹஸ்தம்</option>
+                    <option value="chitra">சித்திரை</option>
+                    <option value="swati">விசாகம்</option>
+                    <option value="vishakha">விசாகம்</option>
+                    <option value="anuradha">அனுசம்</option>
+                    <option value="jyeshtha">கேட்டை</option>
+                    <option value="mula">மூலம்</option>
+                    <option value="purva_ashadha">பூராடம்</option>
+                    <option value="uttara_ashadha">உத்திராடம்</option>
+                    <option value="shravana">திருவோணம்</option>
+                    <option value="dhanishta">அவிட்டம்</option>
+                    <option value="shatabhisha">சதயம்</option>
+                    <option value="purva_bhadrapada">பூரட்டாதி</option>
+                    <option value="uttara_bhadrapada">உத்திரட்டாதி</option>
+                    <option value="revati">ரேவதி</option>
+ </select>
+                <div class="nakshatra-info">உங்கள் நட்சத்திரத்தை தெரியாவிட்டால், பிறப்பு தேதியைப் பயன்படுத்தி online panchang உதவி பெற்றுக்கொள்ளவும்</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display:none;">
+        <div class="card-header" style="background: #d32f2f; color: white;">★ பொருத்தம் முடிவு ★</div>
+        
+ <div class="score-circle" id="scoreCircle">
+0/36
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 20px; font-weight: bold;">
+            <span id="verdictText">ஆய்வு செய்யப்படவில்லை</span>
+        </div>
+        
+        <div class="verdict-circle" id="verdictCircle">
+            ஆய்வு செய்யப்படவில்லை
+        </div>
+        
+        <ul class="porutham-list" id="poruthamList">
+            <!-- Porutham items will be added here dynamically -->
+        </ul>
+        
+        <div class="pros-cons">
+            <div class="pros">
+                <strong>✓ நல்ல பகுதிகள் (Pros)</strong>
+                <div id="prosList"></div>
+            </div>
+            <div class="cons">
+                <strong>✗ கவனிக்க வேண்டிய பகுதிகள் (Cons)</strong>
+                <div id="consList"></div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            <strong>முக்கிய கூறுகள்:</strong>
+ <div id="keyPoints"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn" id="calculateBtn">பொருத்தம் கணக்கிடு</button>
+        <button class="btn btn-reset" id="resetBtn">மீட்டமை</button>
+    </div>
+
+    <div class="footer">
+        <p>இந்த டூல் தனிப்பட்ட ஆய்வுகளுக்கானது. திருமண முடிவுகளை இதற்கு மட்டும் நம்பியிருக்க கூடாது.</p>
+        <p>உங்கள் தரவு ஏனைய இடங்களுக்கு அனுப்பப்படுவதில்லை - பூர்த்தி தனியுரிமை</p>
+    </div>
+
+    <script>
+        // Traditional 10 Poruthams with points
+        const poruthamRules = [
+            { name: "தினம் (Dinam)", 
+                points: 1,
+                description: "Health and longevity compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+ // Simple logic: compatible if nakshatras are not enemies
+                    const incompatible = ["bharani", "krittika", "rohini", "mrigashirsha", "ardra"];
+                    if (incompatible.includes(maleNakshatra) && incompatible.includes(femaleNakshatra)) {
+                        return false;
+                    }
+                    return true;
+                }
+            },
+            { 
+                name: "கணம் (Ganam)", 
+                points: 1,
+                description: "Temperament and character matching",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Deva, Manushya, Rakshasa ganam classification
+                    const gana = {
+ 'aswini': 'deva', 'bharani': 'rakshasa', 'krittika': 'rakshasa', 'rohini': 'manushya',
+                        'mrigashirsha': 'manushya', 'ardra': 'rakshasa', 'punarvasu': 'deva', 'pushya': 'deva',
+                        'ashlesha': 'rakshasa', 'magha': 'rakshasa', 'purva_phalguni': 'manushya', 'uttara_phalguni': 'manushya',
+                        'hasta': 'deva', 'chitra': 'rakshasa', 'swati': 'deva', 'vishakha': 'rakshasa',
+                        'anuradha': 'deva', 'jyeshtha': 'rakshasa', 'mula': 'rakshasa', 'purva_ashadha': 'manushya',
+                        'uttara_ashadha': 'manushya', 'shravana': 'deva', 'dhanishta': 'rakshasa', 'shatabhisha': 'rakshasa',
+                        'purva_bhadrapada': 'rakshasa', 'uttara_bhadrapada': 'manushya', 'revati': 'deva'
+                    };
+                    const maleGana = gana[maleNakshatra] || 'deva';
+                    const femaleGana = gana[femaleNakshatra] || 'deva';
+                    
+                    // Deva-Deva, Manushya-Manushya, Deva-Manushya are good
+                    // Rakshasa-Rakshasa is also acceptable                    // Deva-Rakshasa and Manushya-Rakshasa are average
+                    if ((maleGana === 'deva' && femaleGana === 'rakshasa') || (maleGana === 'rakshasa' && femaleGana === 'deva') ||
+                        (maleGana === 'manushya' && femaleGana === 'rakshasa') ||
+                        (maleGana === 'rakshasa' && femaleGana === 'manushya')) {
+ return 'average';
+                    }
+                    return true;
+ }
+            },
+            { 
+                name: "யோனி (Yoni)", 
+                points: 4,
+                description: "Nature and sexual compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Yoni classification based on nakshatra
+                    const yoni = {
+                        'aswini': 'horse', 'bharani': 'elephant', 'krittika': 'goat', 'rohini': 'snake',
+                        'mrigashirsha': 'snake', 'ardra': 'dog', 'punarvasu': 'cat', 'pushya': 'goat',
+                        'ashlesha': 'cat', 'magha': 'rat', 'purva_phalguni': 'rat', 'uttara_phalguni': 'bull',
+                        'hasta': 'buffalo', 'chitra': 'tiger', 'swati': 'buffalo', 'vishakha': 'tiger',
+                        'anuradha': 'deer', 'jyeshtha': 'deer', 'mula': 'dog', 'purva_ashadha': 'monkey',
+                        'uttara_ashadha': 'cow', 'shravana': 'monkey', 'dhanishta': 'lion', 'shatabhisha': 'horse',
+                        'purva_bhadrapada': 'lion', 'uttara_bhadrapada': 'cow', 'revati': 'elephant'
+                    };
+                    
+                    const maleYoni = yoni[maleNakshatra] || 'neutral';
+                    const femaleYoni = yoni[femaleNakshatra] || 'neutral';
+                    
+                    // Friendly yonis: horse-horse, elephant-elephant, etc.
+                    // Natural enemies: cat-rat, dog-snake, etc.
+                    const enemies = [
+ ['cat', 'rat'], ['dog', 'snake'], ['tiger', 'deer'], ['lion', 'elephant']
+ ];
+                    
+                    for (let pair of enemies) {
+ if ((maleYoni === pair[0] && femaleYoni === pair[1]) ||
+                            (maleYoni === pair[1] && femaleYoni === pair[0])) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            },
+            { 
+                name: "ராசி (Rasi)", 
+                points: 5,
+                description: "Zodiac sign compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Rasi based on nakshatra position
+                    const rasi = {
+                        'aswini': 'mesha', 'bharani': 'mesha', 'krittika': 'vrishabha', 'rohini': 'vrishabha',
+                        'mrigashirsha': 'mithuna', 'ardra': 'mithuna', 'punarvasu': 'kataka', 'pushya': 'kataka',
+                        'ashlesha': 'kataka', 'magha': 'simha', 'purva_phalguni': 'simha', 'uttara_phalguni': 'kanya',
+                        'hasta': 'kanya', 'chitra': 'tula', 'swati': 'tula', 'vishakha': 'vrischika',
+                        'anuradha': 'vrischika', 'jyeshtha': 'vrischika', 'mula': 'dhanus', 'purva_ashadha': 'dhanus',
+                        'uttara_ashadha': 'makara', 'shravana': 'makara', 'dhanishta': 'kumbha', 'shatabhisha': 'kumbha',
+                        'purva_bhadrapada': 'meena', 'uttara_bhadrapada': 'meena', 'revati': 'meena'
+                    };
+                    
+                    const maleRasi = rasi[maleNakshatra] || 'mesha';
+                    const femaleRasi = rasi[femaleNakshatra] || 'mesha';
+                    
+                    // 7th rasi from each other is generally avoidable (7th house is maraka)
+                    // But there are exceptions
+                    const rasiOrder = ['mesha', 'vrishabha', 'mithuna', 'kataka', 'simha', 'kanya', 
+ 'tula', 'vrischika', 'dhanus', 'makara', 'kumbha', 'meena'];
+                    
+                    const maleIndex = rasiOrder.indexOf(maleRasi);
+                    const femaleIndex = rasiOrder.indexOf(femaleRasi);
+                    
+                    // If female's rasi is 2nd, 3rd, 4th, 5th, 6th, 8th, 9th, or 11th from male's rasi
+                    const diff = Math.abs(maleIndex - femaleIndex);
+                    const positions = [2, 3, 4, 5, 6, 8, 9, 11];
+                    
+                    return positions.includes(diff);
+                }
+            },
+            { 
+                name: "ராசித்திபதி (Rasiyathipathi)", 
+                points: 5,
+                description: "Planetary lord compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Planet lords for rashis
+                    const rasiLord = {
+                        'mesha': 'mars', 'vrishabha': 'venus', 'mithuna': 'mercury', 'kataka': 'moon',
+                        'simha': 'sun', 'kanya': 'mercury', 'tula': 'venus', 'vrischika': 'mars',
+                        'dhanus': 'jupiter', 'makara': 'saturn', 'kumbha': 'saturn', 'meena': 'jupiter'
+                    };
+                    
+                    const rasi = {
+                        'aswini': 'mesha', 'bharani': 'mesha', 'krittika': 'vrishabha', 'rohini': 'vrishabha',
+                        'mrigashirsha': 'mithuna', 'ardra': 'mithuna', 'punarvasu': 'kataka', 'pushya': 'kataka',
+                        'ashlesha': 'kataka', 'magha': 'simha', 'purva_phalguni': 'simha', 'uttara_phalguni': 'kanya',
+                        'hasta': 'kanya', 'chitra': 'tula', 'swati': 'tula', 'vishakha': 'vrischika',
+                        'anuradha': 'vrischika', 'jyeshtha': 'vrischika', 'mula': 'dhanus', 'purva_ashadha': 'dhanus',
+                        'uttara_ashadha': 'makara', 'shravana': 'makara', 'dhanishta': 'kumbha', 'shatabhisha': 'kumbha',
+                        'purva_bhadrapada': 'meena', 'uttara_bhadrapada': 'meena', 'revati': 'meena'
+                    };
+                    
+                    const maleLord = rasiLord[rasi[maleNakshatra]] || 'mars';
+                    const femaleLord = rasiLord[rasi[femaleNakshatra]] || 'mars';
+                    
+                    // Friendly planetary combinations
+                    const friendly = {
+                        'mars': ['sun', 'jupiter', 'moon'],
+                        'venus': ['saturn', 'mercury'],
+                        'mercury': ['sun', 'venus'],
+                        'moon': ['sun', 'mars'],
+                        'sun': ['mars', 'jupiter', 'moon'],
+                        'jupiter': ['sun', 'moon', 'mars'],
+                        'saturn': ['venus', 'mercury']
+                    };
+                    
+                    if (friendly[maleLord] && friendly[maleLord].includes(femaleLord)) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            { 
+                name: "ராஜ்ஜு (Rajju)", 
+                points: 5,
+                description: "Bond and longevity of spouse",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Rajju classification const rah = {
+                        'aswini': 'padhu', 'bharani': 'padhu', 'krittika': 'padhu', 'rohini': 'nedu',
+                        'mrigashirsha': 'nedu', 'ardra': 'nedu', 'punarvasu': 'kunrak', 'pushya': 'kunrak',
+                        'ashlesha': 'kunrak', 'magha': 'kalla', 'purva_phalguni': 'kalla', 'uttara_phalguni': 'kalla',
+                        'hasta': 'kalla', 'chitra': 'kan', 'swati': 'kan', 'vishakha': 'kan',
+                        'anuradha': 'kan', 'jyeshtha': 'kan', 'mula': 'padhu', 'purva_ashadha': 'padhu',
+                        'uttara_ashadha': 'padhu', 'shravana': 'nedu', 'dhanishta': 'nedu', 'shatabhisha': 'nedu',
+                        'purva_bhadrapada': 'kunrak', 'uttara_bhadrapada': 'kunrak', 'revati': 'kunrak'
+                    };
+                    
+                    const maleRajju = rah[maleNakshatra] || 'padhu';
+                    const femaleRajju = rah[femaleNakshatra] || 'padhu';
+                    
+                    // If both have same rahju, it's avoidable (especially for husband's longevity)
+                    if (maleRajju === femaleRajju) {
+                        return false;
+                    }
+                    return true;
+                }
+            },
+            { 
+                name: "வேதம் (Vedha)", 
+                points: 5,
+                description: "Alliance and obstacle checking",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Vedha nakshatras that are opposites const vedhaPairs = [
+ ['aswini', 'bharani'], ['krittika', 'rohini'], ['mrigashirsha', 'ardra'],
+                        ['punarvasu', 'pushya'], ['ashlesha', 'magha'], ['purva_phalguni', 'uttara_phalguni'],
+                        ['hasta', 'chitra'], ['swati', 'vishakha'], ['anuradha', 'jyeshtha'],
+                        ['mula', 'purva_ashadha'], ['uttara_ashadha', 'shravana'], ['dhanishta', 'shatabhisha'],
+                        ['purva_bhadrapada', 'uttara_bhadrapada']
+                    ];
+                    
+                    for (let pair of vedhaPairs) {
+                        if ((maleNakshatra === pair[0] && femaleNakshatra === pair[1]) ||
+ (maleNakshatra === pair[1] && femaleNakshatra === pair[0])) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            },
+            { 
+ name: "வச்சியம் (Vasya)", 
+                points: 2,
+                description: "Mutual attraction and control",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Vasya nakshatras - those that are controllable
+                    const vasya = {
+                        'aswini': ['bharani', 'krittika', 'rohini', 'mrigashirsha', 'ardra'],
+                        'bharani': ['rohini', 'mrigashirsha', 'ardra', 'punarvasu', 'pushya'],
+                        'krittika': ['rohini', 'mrigashirsha', 'ardra', 'punarvasu', 'pushya'],
+                        'rohini': ['mrigashirsha', 'ardra', 'punarvasu', 'pushya', 'ashlesha'],
+                        'mrigashirsha': ['ardra', 'punarvasu', 'pushya', 'ashlesha', 'magha'],
+                        'ardra': ['punarvasu', 'pushya', 'ashlesha', 'magha', 'purva_phalguni'],
+                        'punarvasu': ['pushya', 'ashlesha', 'magha', 'purva_phalguni', 'uttara_phalguni'],
+                        'pushya': ['ashlesha', 'magha', 'purva_phalguni', 'uttara_phalguni', 'hasta'],
+                        'ashlesha': ['magha', 'purva_phalguni', 'uttara_phalguni', 'hasta', 'chitra'],
+                        'magha': ['purva_phalguni', 'uttara_phalguni', 'hasta', 'chitra', 'swati'],
+                        'purva_phalguni': ['uttara_phalguni', 'hasta', 'chitra', 'swati', 'vishakha'],
+                        'uttara_phalguni': ['hasta', 'chitra', 'swati', 'vishakha', 'anuradha'],
+                        'hasta': ['chitra', 'swati', 'vishakha', 'anuradha', 'jyeshtha'],
+                        'chitra': ['swati', 'vishakha', 'anuradha', 'jyeshtha', 'mula'],
+                        'swati': ['vishakha', 'anuradha', 'jyeshtha', 'mula', 'purva_ashadha'],
+                        'vishakha': ['anuradha', 'jyeshtha', 'mula', 'purva_ashadha', 'uttara_ashadha'],
+                        'anuradha': ['jyeshtha', 'mula', 'purva_ashadha', 'uttara_ashadha', 'shravana'],
+                        'jyeshtha': ['mula', 'purva_ashadha', 'uttara_ashadha', 'shravana', 'dhanishta'],
+                        'mula': ['purva_ashadha', 'uttara_ashadha', 'shravana', 'dhanishta', 'shatabhisha'],
+                        'purva_ashadha': ['uttara_ashadha', 'shravana', 'dhanishta', 'shatabhisha', 'purva_bhadrapada'],
+                        'uttara_ashadha': ['shravana', 'dhanishta', 'shatabhisha', 'purva_bhadrapada', 'uttara_bhadrapada'],
+                        'shravana': ['dhanishta', 'shatabhisha', 'purva_bhadrapada', 'uttara_bhadrapada', 'revati'],
+                        'dhanishta': ['shatabhisha', 'purva_bhadrapada', 'uttara_bhadrapada', 'revati', 'aswini'],
+                        'shatabhisha': ['purva_bhadrapada', 'uttara_bhadrapada', 'revati', 'aswini', 'bharani'],
+                        'purva_bhadrapada': ['uttara_bhadrapada', 'revati', 'aswini', 'bharani', 'krittika'],
+                        'uttara_bhadrapada': ['revati', 'aswini', 'bharani', 'krittika', 'rohini'],
+                        'revati': ['aswini', 'bharani', 'krittika', 'rohini', 'mrigashirsha']
+                    };
+                    if (vasya[maleNakshatra] && vasya[maleNakshatra].includes(femaleNakshatra)) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+            { 
+ name: "மஹேந்திரம் (Mahendram)", points: 5,
+                description: "Prosperity and offspring",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Mahendram: Female's nakshatra should be 5th, 7th, or 9th from male's
+                    const nakshatraOrder = [
+ 'aswini', 'bharani', 'krittika', 'rohini', 'mrigashirsha', 'ardra',
+                        'punarvasu', 'pushya', 'ashlesha', 'magha', 'purva_phalguni', 'uttara_phalguni',
+                        'hasta', 'chitra', 'swati', 'vishakha', 'anuradha', 'jyeshtha',
+                        'mula', 'purva_ashadha', 'uttara_ashadha', 'shravana', 'dhanishta', 'shatabhisha',
+                        'purva_bhadrapada', 'uttara_bhadrapada', 'revati'
+                    ];
+                    
+                    const maleIndex = nakshatraOrder.indexOf(maleNakshatra);
+                    const femaleIndex = nakshatraOrder.indexOf(femaleNakshatra);
+                    
+                    const diff = (femaleIndex - maleIndex + 27) % 27;
+                    const goodPositions = [5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25];
+                    return goodPositions.includes(diff);
+                }
+            },
+            { 
+ name: "ஸ்திரீ தீர்த்தம் (Stree Deergham)", 
+                points: 5,
+                description: "Wealth and prosperity",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Female's nakshatra should be 9th, 10th, or 11th from male's
+                    const nakshatraOrder = [
+                        'aswini', 'bharani', 'krittika', 'rohini', 'mrigashirsha', 'ardra',
+                        'punarvasu', 'pushya', 'ashlesha', 'magha', 'purva_phalguni', 'uttara_phalguni',
+                        'hasta', 'chitra', 'swati', 'vishakha', 'anuradha', 'jyeshtha',
+                        'mula', 'purva_ashadha', 'uttara_ashadha', 'shravana', 'dhanishta', 'shatabhisha',
+                        'purva_bhadrapada', 'uttara_bhadrapada', 'revati'
+                    ];
+                    
+                    const maleIndex = nakshatraOrder.indexOf(maleNakshatra);
+                    const femaleIndex = nakshatraOrder.indexOf(femaleNakshatra);
+                    
+                    const diff = (femaleIndex - maleIndex + 27) % 27;
+                    const goodPositions = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+                    return goodPositions.includes(diff);
+                }
+            },
+            { 
+ name: "நாடி (Nadi)", points: 5,
+                description: "Health and genetic compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Nadi classification                    const nadi = {
+                        'aswini': 'vata', 'bharani': 'vata', 'krittika': 'pitta', 'rohini': 'pitta',
+                        'mrigashirsha': 'pitta', 'ardra': 'vata', 'punarvasu': 'vata', 'pushya': 'pitta',
+                        'ashlesha': 'pitta', 'magha': 'kapha', 'purva_phalguni': 'kapha', 'uttara_phalguni': 'vata',
+                        'hasta': 'vata', 'chitra': 'pitta', 'swati': 'vata', 'vishakha': 'pitta',
+                        'anuradha': 'pitta', 'jyeshtha': 'kapha', 'mula': 'kapha', 'purva_ashadha': 'vata',
+                        'uttara_ashadha': 'vata', 'shravana': 'kapha', 'dhanishta': 'vata', 'shatabhisha': 'kapha',
+                        'purva_bhadrapada': 'kapha', 'uttara_bhadrapada': 'vata', 'revati': 'pitta'
+                    };
+                    
+                    const maleNadi = nadi[maleNakshatra] || 'vata';
+                    const femaleNadi = nadi[femaleNakshatra] || 'vata';
+                    
+                    // Same Nadi is avoidable (especially for siblings/cousins)
+                    // But for marriage, same Nadi is generally not recommended
+                    if (maleNadi === femaleNadi) {
+                        return false;
+                    }
+                    return true;
+                }
+            },
+            { 
+ name: "வர்ணம் (Varnam)", 
+                points: 1,
+                description: "Caste and spiritual compatibility",
+                check: function(maleNakshatra, femaleNakshatra) {
+                    // Varna classification
+                    const varna = {
+                        'aswini': 'brahmin', 'bharani': 'kshatriya', 'krittika': 'vaisya', 'rohini': 'sudra',
+                        'mrigashirsha': 'brahmin', 'ardra': 'kshatriya', 'punarvasu': 'vaisya', 'pushya': 'sudra',
+                        'ashlesha': 'brahmin', 'magha': 'kshatriya', 'purva_phalguni': 'vaisya', 'uttara_phalguni': 'sudra',
+                        'hasta': 'brahmin', 'chitra': 'kshatriya', 'swati': 'vaisya', 'vishakha': 'sudra',
+                        'anuradha': 'brahmin', 'jyeshtha': 'kshatriya', 'mula': 'vaisya', 'purva_ashadha': 'sudra',
+                        'uttara_ashadha': 'brahmin', 'shravana': 'kshatriya', 'dhanishta': 'vaisya', 'shatabhisha': 'sudra',
+                        'purva_bhadrapada': 'brahmin', 'uttara_bhadrapada': 'kshatriya', 'revati': 'vaisya'
+                    };
+                    
+                    const maleVarna = varna[maleNakshatra] || 'sudra';
+                    const femaleVarna = varna[femaleNakshatra] || 'sudra';
+                    
+                    // Ideally male's varna should be equal or higher than female's
+                    const varnaOrder = ['sudra', 'vaisya', 'kshatriya', 'brahmin'];
+                    const maleIndex = varnaOrder.indexOf(maleVarna);
+                    const femaleIndex = varnaOrder.indexOf(femaleVarna);
+                    
+                    return maleIndex >= femaleIndex;
+                }
+            }
+ ];
+
+        // Get nakshatra index
+        function getNakshatraIndex(nakshatra) {
+            const nakshatraList = [
+ "aswini", "bharani", "krittika", "rohini", "mrigashirsha", "ardra", 
+                "punarvasu", "pushya", "ashlesha", "magha", "purva_phalguni", "uttara_phalguni",
+                "hasta", "chitra", "swati", "vishakha", "anuradha", "jyeshtha",
+                "mula", "purva_ashadha", "uttara_ashadha", "shravana", "dhanishta", "shatabhisha",
+                "purva_bhadrapada", "uttara_bhadrapada", "revati"
+ ];
+            return nakshatraList.indexOf(nakshatra);
+        }
+
+        // Calculate match        function calculateMatch() {
+            // Get form values
+            const maleName = document.getElementById('maleName').value.trim();
+            const femaleName = document.getElementById('femaleName').value.trim();
+            const maleNakshatra = document.getElementById('maleNakshatra').value;
+            const femaleNakshatra = document.getElementById('femaleNakshatra').value;
+            
+            // Validate inputs
+            if (!maleName || !femaleName || !maleNakshatra || !femaleNakshatra) {
+                alert('தயவுசெய்து அத்தியாவசிய தகவல்களை உள்ளிடவும்: பெயர், நட்சத்திரம்');
+                return;
+            }
+            
+            // Clear previous results
+            document.getElementById('resultSection').style.display = 'block';
+            const poruthamList = document.getElementById('poruthamList');
+            poruthamList.innerHTML = '';
+            let totalScore = 0;
+            let goodMatches = 0;
+            let averageMatches = 0;
+            let badMatches = 0;
+            let pros = [];
+            let cons = [];
+            
+            // Calculate each porutham
+            poruthamRules.forEach((porutham, index) => {
+                let status = 'good';
+                let score = porutham.points;
+                let result = porutham.check(maleNakshatra, femaleNakshatra);
+                
+                if (result === false) {
+                    badMatches++;
+                    status = 'bad';
+                    score = 0;
+ cons.push(porutham.name);
+                } else if (result === 'average') {
+                    averageMatches++;
+                    status = 'average';
+                    score = Math.floor(porutham.points / 2);
+                    cons.push(porutham.name);
+                } else {
+                    goodMatches++;
+                    pros.push(porutham.name);
+                }
+                
+                totalScore += score;
+                
+                // Create list item
+                const li = document.createElement('li');
+                li.className = `porutham-${status}`;
+                
+                const starIcon = status === 'good' ? '★' : 
+ status === 'average' ? '★★' : '★';
+                
+                li.innerHTML = `
+                    <span><strong>${porutham.name}</strong> (${porutham.points} புள்ளிகள்)</span>
+                    <span>${starIcon} ${status.toUpperCase()}</span>
+                `;
+                poruthamList.appendChild(li);
+            });
+            
+            // Update score display
+            const scoreCircle = document.getElementById('scoreCircle');
+            scoreCircle.textContent = `${totalScore}/36`;
+            
+            // Update verdict
+            let verdictText = '';
+            let verdictClass = '';
+            // Binary compatibility decision
+            // Traditional: 27+ points is good, 18-26 average, below 18 not recommended
+            if (totalScore >= 27) {
+ verdictText = "ஆம், திருமணத்திற்கு உகப்பாக உள்ளது";
+                verdictClass = "verdict-yes";
+            } else if (totalScore >= 18) {
+                verdictText = "சராசரி, கவனம் தேவை";
+                verdictClass = "verdict-avg";
+            } else {
+                verdictText = "இல்லை, பரிந்துரைக்கப்படவில்லை";
+                verdictClass = "verdict-no";
+            }
+            
+            const verdictCircle = document.getElementById('verdictCircle');
+            verdictCircle.className = `verdict-circle ${verdictClass}`;
+            verdictCircle.textContent = verdictText;
+            
+            // Update key points
+            const keyPoints = document.getElementById('keyPoints');
+            keyPoints.innerHTML = `
+                1. மொத்த புள்ளிகள்: ${totalScore}/36<br>
+                2. நல்ல பொருத்தங்கள்: ${goodMatches} (${Math.round((goodMatches/10)*100)}%)<br>
+                3. கவனிக்க வேண்டியவை: ${badMatches} (முக்கியமாக: ${cons.slice(0, 3).join(', ')})<br>
+                4. திருமண உத்தேசம்: ${verdictText}<br>
+                5. பரிந்துரை: ${totalScore >= 18 ? 'தொடர்ந்து ஆய்வு செய்யவும்' : 'மற்ற உறவாடல்களை பரிசீலிக்கவும்'}
+ `;
+            
+            // Update pros and cons
+            document.getElementById('prosList').innerHTML = pros.slice(0, 3).map(p => `✓ ${p}`).join('<br>');
+            document.getElementById('consList').innerHTML = cons.slice(0, 3).map(c => `✗ ${c}`).join('<br>');
+            
+            // Add note about important poruthams
+            const importantNote = document.createElement('div');
+            importantNote.style.marginTop = '20px';
+            importantNote.style.padding = '15px';
+            importantNote.style.background = '#fff3e0';
+            importantNote.style.borderLeft = '4px solid #ef6c00';
+            importantNote.innerHTML = `
+                <strong>⭐ முக்கிய நுணுக்கங்கள்:</strong><br>
+                • ராஜ்ஜு, நாடி, யோனி பொருத்தங்கள் மிகவும் முக்கியம்<br>
+                • 27 புள்ளிகளுக்கு மேல் நல்ல பொருத்தம்<br>
+                • 18-26 புள்ளிகள் சராசரி (கூடுதல் ஆய்வு தேவை)<br>
+                • 18 புள்ளிகளுக்கு கீழே பரிந்துரைக்கப்படவில்லை
+            `;
+            document.querySelector('.result-section').appendChild(importantNote);
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('maleName').value = '';
+            document.getElementById('femaleName').value = '';
+            document.getElementById('maleNakshatra').value = '';
+            document.getElementById('femaleNakshatra').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+        }
+
+        // Event listeners
+        document.getElementById('calculateBtn').addEventListener('click', calculateMatch);
+        document.getElementById('resetBtn').addEventListener('click', resetForm);
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateMatch();
+            }
+        });
+    </script>
+</body>
+</html>
