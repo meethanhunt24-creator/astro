@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>திருமண பொருத்தம் | Tamil Marriage Matching</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #b71c1c, #e53935);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .card-header {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: -25px -25px 20px -25px;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #b71c1c;
+            box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.2);
+        }
+        
+        .btn {
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: background0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .btn-reset {
+            background-color: #757575;
+            margin-top: 5px;
+        }
+        
+        .btn-reset:hover {
+            background-color: #8d6e63;
+        }
+        
+        .result-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            margin-top: 30px;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b71c1c, #e53935);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 8px rgba(183, 28, 28, 0.3);
+        }
+        
+        .porutham-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .porutham-list li {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .porutham-good {
+            background-color: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .porutham-average {
+            background-color: #fff3e0;
+            border-left: 4px solid #ef6c00;
+        }
+        
+        .porutham-bad {
+            background-color: #ffebee;
+            border-left: 4px solid #c62828;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .star-rating {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .info-tooltip {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            position: absolute;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>திருமண பொருத்தம்</h1>
+        <p class="subtitle">Free Tamil Marriage Matching |100% Private | No Data Collected</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">★ புத்திரரின் விவரங்கள் ★</div>
+            <div class="form-group">
+                <label for="maleName">பையனின் பெயர் *</label>
+                <input type="text" id="maleName" placeholder="உதாரணம்: கார்த்தி">
+ </div>
+            <div class="form-group">
+                <label for="maleDob">பிறப்பு தேதி (YYYY-MM-DD) *</label>
+                <input type="text" id="maleDob" placeholder="உதாரணம்: 1990-05-15">
+            </div>
+            <div class="form-group">
+                <label for="maleTime">பிறப்பு நேரம் (HH:MM) *</label>
+                <input type="text" id="maleTime" placeholder="உதாரணம்: 14:30">
+            </div>
+            <div class="form-group">
+                <label for="maleNakshatra">நட்சத்திரம் *</label>
+                <select id="maleNakshatra">
+                    <option value="">தேர்வு செய்யவும்</option>
+                    <option value="aswini">அஸ்வினி</option>
+                    <option value="bharani">பரணி</option>
+                    <option value="krittika">கிருத்திகை</option>
+                    <option value="rohini">ரோகிணி</option>
+                    <option value="mrigashirsha">மிருகசீரிடம்</option>
+                    <option value="ardra">திருவாதிரை</option>
+                    <option value="punarvasu">புனர்பூசம்</option>
+                    <option value="pushya">பூசம்</option>
+                    <option value="ashlesha">ஆயில்யம்</option>
+                    <option value="magha">மகம்</option>
+                    <option value="purva_phalguni">பூரம்</option>
+                    <option value="uttara_phalguni">உத்திரம்</option>
+                    <option value="hasta">ஹஸ்தம்</option>
+                    <option value="chitra">சித்திரை</option>
+                    <option value="swati">விசாகம்</option>
+                    <option value="vishakha">விசாகம்</option>
+                    <option value="anuradha">அனுசம்</option>
+                    <option value="jyeshtha">கேட்டை</option>
+                    <option value="mula">மூலம்</option>
+                    <option value="purva_ashadha">பூராடம்</option>
+                    <option value="uttara_ashadha">உத்திராடம்</option>
+                    <option value="shravana">திருவோணம்</option>
+                    <option value="dhanishta">அவிட்டம்</option>
+                    <option value="shatabhisha">சதயம்</option>
+                    <option value="purva_bhadrapada">பூரட்டாதி</option>
+                    <option value="uttara_bhadrapada">உத்திரட்டாதி</option>
+                    <option value="revati">ரேவதி</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">★ பெண்ணின் விவரங்கள் ★</div>
+            <div class="form-group">
+                <label for="femaleName">பெண்ணின் பெயர் *</label>
+                <input type="text" id="femaleName" placeholder="உதாரணம்: லக்ஷ்மி">
+            </div>
+            <div class="form-group">
+                <label for="femaleDob">பிறப்பு தேதி (YYYY-MM-DD) *</label>
+                <input type="text" id="femaleDob" placeholder="உதாரணம்: 1992-08-20">
+            </div>
+            <div class="form-group">
+                <label for="femaleTime">பிறப்பு நேரம் (HH:MM) *</label>
+                <input type="text" id="femaleTime" placeholder="உதாரணம்: 08:15">
+            </div>
+            <div class="form-group">
+                <label for="femaleNakshatra">நட்சத்திரம் *</label>
+                <select id="femaleNakshatra">
+                    <option value="">தேர்வு செய்யவும்</option>
+                    <option value="aswini">அஸ்வினி</option>
+                    <option value="bharani">பரணி</option>
+                    <option value="krittika">கிருத்திகை</option>
+                    <option value="rohini">ரோகிணி</option>
+                    <option value="mrigashirsha">மிருகசீரிடம்</option>
+                    <option value="ardra">திருவாதிரை</option>
+                    <option value="punarvasu">புனர்பூசம்</option>
+                    <option value="pushya">பூசம்</option>
+                    <option value="ashlesha">ஆயில்யம்</option>
+                    <option value="magha">மகம்</option>
+                    <option value="purva_phalguni">பூரம்</option>
+                    <option value="uttara_phalguni">உத்திரம்</option>
+                    <option value="hasta">ஹஸ்தம்</option>
+                    <option value="chitra">சித்திரை</option>
+                    <option value="swati">விசாகம்</option>
+                    <option value="vishakha">விசாகம்</option>
+                    <option value="anuradha">அனுசம்</option>
+                    <option value="jyeshtha">கேட்டை</option>
+                    <option value="mula">மூலம்</option>
+                    <option value="purva_ashadha">பூராடம்</option>
+                    <option value="uttara_ashadha">உத்திராடம்</option>
+                    <option value="shravana">திருவோணம்</option>
+                    <option value="dhanishta">அவிட்டம்</option>
+                    <option value="shatabhisha">சதயம்</option>
+                    <option value="purva_bhadrapada">பூரட்டாதி</option>
+                    <option value="uttara_bhadrapada">உத்திரட்டாதி</option>
+                    <option value="revati">ரேவதி</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+ <div class="result-section" id="resultSection" style="display:none;">
+        <div class="card-header" style="background: #d32f2f; color: white;">★ பொருத்தம் முடிவு ★</div>
+        
+        <div class="score-circle" id="scoreCircle">
+            0/36
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 20px; font-weight: bold;">
+            <span id="verdictText">ஆய்வு செய்யப்படவில்லை</span>
+        </div>
+        
+        <ul class="porutham-list" id="poruthamList">
+            <!-- Porutham items will be added here dynamically -->
+        </ul>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            <strong>முக்கிய கூறுகள்:</strong>
+            <div id="keyPoints"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn" id="calculateBtn">பொருத்தம் கணக்கிடு</button>
+        <button class="btn btn-reset" id="resetBtn">மீட்டமை</button>
+    </div>
+
+    <div class="footer">
+        <p>இந்த டூல் தனிப்பட்ட ஆய்வுகளுக்கானது. திருமண முடிவுகளை இதற்கு மட்டும் நம்பியிருக்க கூடாது.</p>
+        <p>உங்கள் தரவு ஏனைய இடங்களுக்கு அனுப்பப்படுவதில்லை - பூர்த்தி தனியுரிமை</p>
+    </div>
+
+    <script>
+        // Porutham data and rules
+        const poruthams = [
+            { name: "தினம் (Dinam)", points: 1, description: "Health and longevity compatibility" },
+            { name: "கணம் (Ganam)", points: 1, description: "Temperament and character matching" },
+            { name: "யோனி (Yoni)", points: 4, description: "Nature and sexual compatibility" },
+            { name: "ராசி (Rasi)", points: 5, description: "Zodiac sign compatibility" },
+            { name: "ராசித்திபதி (Rasiyathipathi)", points: 5, description: "Planetary lord compatibility" },
+            { name: "ராஜ்ஜு (Rajju)", points: 5, description: "Bond and longevity of spouse" },
+            { name: "வேதம் (Vedha)", points: 5, description: "Alliance and obstacle checking" },
+            { name: "வச்சியம் (Vasya)", points: 2, description: "Mutual attraction and control" },
+            { name: "மஹேந்திரம் (Mahendram)", points: 5, description: "Prosperity and offspring" },
+            { name: "ஸ்திரீ தீர்த்தம் (Stree Deergham)", points: 5, description: "Wealth and prosperity" },
+            { name: "நாடி (Nadi)", points: 5, description: "Health and genetic compatibility" },
+            { name: "வர்ணம் (Varnam)", points: 1, description: "Caste and spiritual compatibility" }
+        ];
+
+        // Nakshatra matching matrix (simplified for demo)
+        const nakshatraMatches = {
+            "aswini": ["bharani", "rohini", "mrigashirsha", "punarvasu", "pushya", "ashlesha", "magha", "purva_phalguni", "uttara_phalguni", "chitra", "swati", "vishakha", "anuradha", "jyeshtha", "mula", "purva_ashadha", "uttara_ashadha", "shravana", "dhanishta", "shatabhisha", "purva_bhadrapada", "uttara_bhadrapada", "revati"],
+            "bharani": ["aswini", "rohini", "mrigashirsha", "punarvasu", "pushya", "ashlesha", "purva_phalguni", "uttara_phalguni", "chitra", "swati", "vishakha", "anuradha", "jyeshtha", "mula", "purva_ashadha", "uttara_ashadha", "shravana", "dhanishta", "shatabhisha", "purva_bhadrapada", "uttara_bhadrapada", "revati"],
+            // ... more mappings would be needed for full accuracy
+        };
+
+        // Get nakshatra index
+        function getNakshatraIndex(nakshatra) {
+ const nakshatraList = [
+                "aswini", "bharani", "krittika", "rohini", "mrigashirsha", "ardra", 
+                "punarvasu", "pushya", "ashlesha", "magha", "purva_phalguni", "uttara_phalguni",
+                "hasta", "chitra", "swati", "vishakha", "anuradha", "jyeshtha",
+                "mula", "purva_ashadha", "uttara_ashadha", "shravana", "dhanishta", "shatabhisha",
+                "purva_bhadrapada", "uttara_bhadrapada", "revati"
+            ];
+            return nakshatraList.indexOf(nakshatra);
+        }
+
+        // Calculate basic match (simplified for demo)
+        function calculateMatch() {
+            // Get form values
+            const maleName = document.getElementById('maleName').value.trim();
+            const femaleName = document.getElementById('femaleName').value.trim();
+            const maleNakshatra = document.getElementById('maleNakshatra').value;
+            const femaleNakshatra = document.getElementById('femaleNakshatra').value;
+            
+            // Validate inputs
+            if (!maleName || !femaleName || !maleNakshatra || !femaleNakshatra) {
+                alert('தயவுசெய்து அத்தியாவசிய தகவல்களை உள்ளிடவும்: பெயர், நட்சத்திரம்');
+                return;
+            }
+            // Clear previous results
+            document.getElementById('resultSection').style.display = 'block';
+            const poruthamList = document.getElementById('poruthamList');
+            poruthamList.innerHTML = '';
+            
+            // Calculate total score (simplified)
+            let totalScore = 0;
+            let goodMatches = 0;
+            let averageMatches = 0;
+            let badMatches = 0;
+            
+            // For demo, we'll use random scores with some logic
+            poruthams.forEach((porutham, index) => {
+                // Simulate porutham result based on nakshatra matching
+                let status = 'good';
+                let score = porutham.points;
+                
+                // Simple logic: if nakshatras are compatible, it's good
+                if (nakshatraMatches[maleNakshatra] && nakshatraMatches[maleNakshatra].includes(femaleNakshatra)) {
+                    goodMatches++;
+                } else if (index % 3 === 0) {
+                    averageMatches++;
+                    status = 'average';
+                    score = Math.floor(porutham.points / 2);
+                } else {
+                    badMatches++;
+                    status = 'bad';
+                    score = 0;
+                }
+                
+                totalScore += score;
+                
+                // Create list item
+                const li = document.createElement('li');
+                li.className = `porutham-${status}`;
+                
+                const starIcon = status === 'good' ? '★' : 
+                               status === 'average' ? '★★' : '★';
+                
+                li.innerHTML = `
+                    <span><strong>${porutham.name}</strong> (${porutham.points} புள்ளிகள்)</span>
+                    <span>${starIcon} ${status.toUpperCase()}</span>
+                `;
+                poruthamList.appendChild(li);
+            });
+            
+            // Update score display
+            const scoreCircle = document.getElementById('scoreCircle');
+            scoreCircle.textContent = `${totalScore}/36`;
+            
+            // Update verdict
+            let verdictText = '';
+            let verdictColor = '';
+ if (totalScore >= 27) {
+                verdictText = "அதிகம் பொருத்தம் - சிறப்பான திருமணம்";
+                verdictColor = "#2e7d32";
+            } else if (totalScore >= 18) {
+                verdictText = "நல்ல பொருத்தம் - திருமணத்திற்கு உகப்பானது";
+                verdictColor = "#1565c0";
+            } else if (totalScore >= 10) {
+                verdictText = "ஸ்தர்ன பொருத்தம் - கவனம் தேவை";
+                verdictColor = "#f57c00";
+            } else {
+                verdictText = "குறைந்த பொருத்தம் - பரிந்துரைக்கப்படவில்லை";
+                verdictColor = "#c62828";
+            }
+            
+            document.getElementById('verdictText').textContent = verdictText;
+            document.getElementById('verdictText').style.color = verdictColor;
+            
+            // Update key points
+            const keyPoints = document.getElementById('keyPoints');
+            keyPoints.innerHTML = `
+                1. மொத்த புள்ளிகள்: ${totalScore}/36<br>
+                2. நல்ல பொருத்தங்கள்: ${goodMatches}<br>
+                3. சராசரி பொருத்தங்கள்: ${averageMatches}<br>
+                4. குறைந்த பொருத்தங்கள்: ${badMatches}<br>
+                5. பரிந்துரை: ${verdictText}
+ `;
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('maleName').value = '';
+            document.getElementById('maleDob').value = '';
+            document.getElementById('maleTime').value = '';
+            document.getElementById('maleNakshatra').value = '';
+            document.getElementById('femaleName').value = '';
+            document.getElementById('femaleDob').value = '';
+            document.getElementById('femaleTime').value = '';
+            document.getElementById('femaleNakshatra').value = '';
+            document.getElementById('resultSection').style.display = 'none';
+        }
+
+        // Event listeners
+        document.getElementById('calculateBtn').addEventListener('click', calculateMatch);
+        document.getElementById('resetBtn').addEventListener('click', resetForm);
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateMatch();
+            }
+        });
+ </script>
+</body>
+</html>
